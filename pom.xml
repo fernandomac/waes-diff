@@ -6,7 +6,7 @@
 	<groupId>com.waes</groupId>
 	<artifactId>waes-diff</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>waes-diff</name>
 	<description>WAES - Assignment Scalable Web</description>
@@ -14,8 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.7.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.1.0.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -45,8 +44,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3.version}</version>			
-		</dependency>
+			</dependency>
 		
 		<dependency>
 		    <groupId>io.springfox</groupId>

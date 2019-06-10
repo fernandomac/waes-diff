@@ -18,12 +18,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.waes.application.WebDiffApplication;
 import com.waes.test.support.TestSampleData;
+import com.waes.web.config.ApplicationConfig;
 import com.waes.web.endpoint.DiffController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=WebDiffApplication.class)
+@ContextConfiguration(classes=ApplicationConfig.class)
 public class DiffFeatureIntegrationTest {
 	
 	@Autowired

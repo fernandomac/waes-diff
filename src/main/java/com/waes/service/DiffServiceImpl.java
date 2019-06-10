@@ -30,14 +30,14 @@ public class DiffServiceImpl implements DiffService {
 	}
 
 	public void save(Long id, String content, Side side) {
-		validateContent(content);
+		validateContent(id, content);
 		diffDao.add(id, content, side);
 	}
 	
 	public DiffResponse getResult(Long id) {
 		Optional<String> left = diffDao.find(id, Side.LEFT);
 		Optional<String> right = diffDao.find(id, Side.RIGHT);
-		validateEnoughDataToComparare(left, right);
+		validateEnoughDataToComparare(id, left, right);
 		
 		DiffResponse response = new DiffResponse();
 		
@@ -71,22 +71,26 @@ public class DiffServiceImpl implements DiffService {
 		return sb.toString();
 	}
 
-	private void validateEnoughDataToComparare(Optional<String> left, Optional<String> right) {
+	private void validateEnoughDataToComparare(Long id, Optional<String> left, Optional<String> right) {
 		if (!left.isPresent() && !right.isPresent()) {
+			LOGGER.debug("No comparison side has been provided for ID {}", id);
 			throw new NotFoundException("No comparison side has been provided");
 		}
 		
 		if (!left.isPresent()) {
+			LOGGER.debug("Left side not provided for ID {}", id);
 			throw new BusinessException("Left side not provided");
 		}
 		
 		if (!right.isPresent()) {
+			LOGGER.debug("Right side not provided for ID {}", id);
 			throw new BusinessException("Right side not provided");
 		}
 	}
 	
-	private void validateContent(String content) {
+	private void validateContent(Long id, String content) {
 		if (StringUtils.isBlank(content) || !isValidBase64(content)) {
+			LOGGER.debug("Invalid Base64 content for ID {}", id);
 			throw new BusinessException("Invalid Base64 content");
 		}
 	}

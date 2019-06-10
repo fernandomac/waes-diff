@@ -31,5 +31,9 @@ public class DiffResponse {
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "DiffResponse [result=" + result + ", details=" + details + "]";
+	}
 }

@@ -4,14 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+
+import com.waes.web.config.ApplicationConfig;
 
 
-@SpringBootApplication
-@ComponentScan(value={
-	"com.waes.repository",
-	"com.waes.service",
-	"com.waes.web"})
+@SpringBootApplication(scanBasePackageClasses = { ApplicationConfig.class })
 public class WebDiffApplication {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebDiffApplication.class);
@@ -20,5 +17,4 @@ public class WebDiffApplication {
 		LOGGER.info("Starting WAES Web Diff Application");
 		SpringApplication.run(WebDiffApplication.class, args);
 	}
-	
 }

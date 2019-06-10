@@ -1,5 +1,7 @@
 package com.waes.model;
 
+import java.util.Objects;
+
 import io.swagger.annotations.ApiModelProperty;
 
 public class DiffRequest {
@@ -20,6 +22,9 @@ public class DiffRequest {
 		this.content = content;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "DiffRequest [content length=" + (Objects.nonNull(content) ? content.length() : content) + "]";
+	}
+
 }

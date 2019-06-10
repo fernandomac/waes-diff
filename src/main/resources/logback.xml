@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+
+	<springProperty scope="context" name="waesLogLevel" source="waes.log.level" defaultValue="debug"/>
+
+	<property name="NOME_APL" value="waes-diff-apl" />
+	<property name="LOG_FOLDER" value="logs" />
+	
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%mdc] %logger{36} - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+	<appender name="LOCAL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FOLDER}/${NOME_APL}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>50MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>3GB</totalSizeCap>
+		</rollingPolicy>
+		<Append>true</Append>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%mdc] %logger{36} - %msg%n
+            </Pattern>
+        </encoder>
+	</appender>
+	
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="LOCAL_FILE" />
+    </root>
+
+    <logger name="com.waes" level="${waesLogLevel}"></logger>
+    
+</configuration>

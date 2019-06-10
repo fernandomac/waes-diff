@@ -36,6 +36,7 @@ public class DiffController {
 	@Autowired
 	private DiffService service;
 	
+	
 	/**
      * Declares the endpoint to save the left side of base64 content.
      *
@@ -52,10 +53,11 @@ public class DiffController {
     		@PathVariable(value="id") Long id,
     		@RequestBody DiffRequest diffRequest) {
 		
-		LOGGER.info(String.format("LEFT SIDE %s - %s", id, diffRequest.getContent()));
+		LOGGER.debug("LEFT SIDE ID: {} - {}", id, diffRequest);
 		
 		service.save(id, diffRequest.getContent(), Side.LEFT);
     }
+	
 	
 	/**
      * Declares the endpoint to save the right side of base64 content.
@@ -71,11 +73,11 @@ public class DiffController {
 		})
     public void registerRigthSide(
     		@PathVariable(value="id") Long id,
-    		@RequestBody DiffRequest input) {
+    		@RequestBody DiffRequest diffRequest) {
 		
-		LOGGER.info(String.format("RIGHT SIDE %s - %s", id, input.getContent()));
+		LOGGER.debug("RIGHT SIDE ID: {} - {}", id, diffRequest);
 		
-		service.save(id, input.getContent(), Side.RIGHT);
+		service.save(id, diffRequest.getContent(), Side.RIGHT);
 
     }
 	
@@ -95,9 +97,13 @@ public class DiffController {
     public DiffResponse getDiffResult(
     		@PathVariable(value="id") Long id) {
 		
-		LOGGER.info(String.format("DIFF %s", id));
+		LOGGER.debug("DIFF QUERY ID: {}", id);
 
-		return service.getResult(id);
+		DiffResponse response = service.getResult(id);
+		
+		LOGGER.debug("DIFF RESPONSE ID: {} - {}", id, response);
+		
+		return response;
 		
     }
 	
