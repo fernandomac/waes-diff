@@ -10,8 +10,7 @@
 3. The results shall provide the following info in JSON format
 4. If equal return that
 5. If not of equal size just return that
-6. If of same size provide insight in where the diffs are, actual diffs are not needed.
-7. So mainly offsets + length in the data
+6. If of same size provide insight in where the diffs are, actual diffs are not needed. (So mainly offsets + length in the data)
 
 
 # Build
@@ -36,8 +35,8 @@ Log file pattern name is: **waes-diff-apl-{yyyy-MM-dd}-{sequencial}.log**
 
 
 # API Swagger
-### JSON: {{host}}:9080/v2/api-docs
-### HTML: {{host}}:9080/swagger-ui.html
+#### JSON: {{host}}:9080/v2/api-docs
+#### HTML: {{host}}:9080/swagger-ui.html
  
 
 # Application Testing
@@ -60,14 +59,15 @@ They should be run from project root.
 ### Build and register docker image from jar
 `docker build -f Dockerfile -t "waes-diff:v1" .`
 
+### run docker image in container
+`docker run  -p 9080:9080 --name waes-diff  -t "waes-diff:v1"` 
+
+### remove running application from docker
+`docker rm -f waes-diff`
+
 ### remove docker image from docker repository
 ```
 docker images
 docker rmi {{IMAGE ID}}
 ```
 
-### run docker image in container
-`docker run  -p 9080:9080 --name waes-diff  -t "waes-diff:v1"` 
-
-### remove running application from docker
-`docker rm -f waes-diff`
