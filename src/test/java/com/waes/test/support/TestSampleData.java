@@ -1,4 +1,4 @@
-package com.waes.test;
+package com.waes.test.support;
 
 public class TestSampleData {
 
@@ -324,4 +324,11 @@ public class TestSampleData {
 			+ "+bnB9vs7GiiJNLelSixmxprwUrxG0Zqe/fdv27o5IGVFR2ro4uryxoSFRWd9aUl9Z2VlZ2NpeAOdF30MCpgCbv7HKZgNow35KkqoEyN6oDIXdxRZ4N6er4H8aCnuQ8ghKB55iJ"
 			+ "jKQV+IeBZUbpOC2iTteiSiXm76rwXDdNlXxJwQsBFIxLdeC5FY0pNY4KM5XLwC5NMnQd7FMac1psVgEsCnhUQgljR1cA+YcCIAB4y6NdnTMxV3O6C2QtKE0s/ATI6LdXADcUkjo";
 	
+	public static final String JSON_SAMPLE_SMALL = "{ \"content\" : \"" + BASE64_SAMPLE_SMALL + "\" }";
+	
+	public static final String JSON_SAMPLE_SMALL_OTHER_CONTENT = "{ \"content\" : \"" + BASE64_SAMPLE_SMALL_OTHER_CONTENT + "\" }";
+	
+	public static final String JSON_SAMPLE_LARGE = "{ \"content\" : \"" + BASE64_SAMPLE_LARGE + "\" }";
+	
+	public static final String JSON_SAMPLE_INVALID= "{ \"content\" : \"rtdasfd$%#\" }";
 }

@@ -28,11 +28,11 @@ This action will compile, run all the unit and integration tests and generate th
 
 waes-diff.war has been built to be runnable as:
  
- 1- stand alone java application using the command: -> java -jar waes-diff.war
- 2- deploy it in a application server like JBOSS
- 3- run it in a docker
+1- stand alone java application using the command: -> java -jar waes-diff.war
+2- deploy it in a application server like JBOSS
+3- run it in a docker
 
 # API Swagger
-Json format: <host>:8080/v2/api-docs
-Html format: <host>:8080/swagger-ui.html
+Json format: <host>:9080/v2/api-docs
+Html format: <host>:9080/swagger-ui.html
 

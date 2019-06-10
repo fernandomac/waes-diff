@@ -18,10 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.waes.domain.Side;
 import com.waes.exception.BusinessException;
+import com.waes.exception.NotFoundException;
 import com.waes.model.DiffResponse;
 import com.waes.model.DiffResult;
 import com.waes.repository.DiffDao;
-import com.waes.test.TestSampleData;
+import com.waes.test.support.TestSampleData;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DiffServiceTest {
@@ -128,7 +129,7 @@ public class DiffServiceTest {
 		
 		DiffResponse actual = service.getResult(id);
 		assertEquals(DiffResult.DIFFERENT_CONTENT, actual.getResult());
-		assertEquals("Offsets: 3084 3085 3086 ", actual.getDetails());
+		assertEquals("Offsets: 3084 3085 3086 - [ Content length: 3088 ]", actual.getDetails());
 		verify(diffDao).find(eq(id), eq(Side.RIGHT));
 		verify(diffDao).find(eq(id), eq(Side.LEFT));
 		verifyNoMoreInteractions(diffDao);
@@ -153,6 +154,18 @@ public class DiffServiceTest {
 		Long id = 4355645L;
 		
 		when(diffDao.find(id, Side.RIGHT)).thenReturn(Optional.of(TestSampleData.BASE64_SAMPLE_LARGE));
+		when(diffDao.find(id, Side.LEFT)).thenReturn(Optional.empty());
+		
+		service.getResult(id);
+		
+	}
+	
+	@Test(expected=NotFoundException.class)
+	public void shoulNotGetResultMissingBothSidest() {
+		
+		Long id = 4355645L;
+		
+		when(diffDao.find(id, Side.RIGHT)).thenReturn(Optional.empty());
 		when(diffDao.find(id, Side.LEFT)).thenReturn(Optional.empty());
 		
 		service.getResult(id);

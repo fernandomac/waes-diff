@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.waes.domain.Side;
 import com.waes.exception.BusinessException;
+import com.waes.exception.NotFoundException;
 import com.waes.model.DiffResponse;
 import com.waes.model.DiffResult;
 import com.waes.repository.DiffDao;
@@ -65,15 +66,21 @@ public class DiffServiceImpl implements DiffService {
 			}
         }
 		
+		sb.append(String.format("- [ Content length: %d ]", right.length));
+		
 		return sb.toString();
 	}
 
 	private void validateEnoughDataToComparare(Optional<String> left, Optional<String> right) {
+		if (!left.isPresent() && !right.isPresent()) {
+			throw new NotFoundException("No comparison side has been provided");
+		}
+		
 		if (!left.isPresent()) {
 			throw new BusinessException("Left side not provided");
 		}
 		
-		if (! right.isPresent()) {
+		if (!right.isPresent()) {
 			throw new BusinessException("Right side not provided");
 		}
 	}
@@ -89,8 +96,8 @@ public class DiffServiceImpl implements DiffService {
             Base64.getDecoder().decode(content);
             return true;
         } catch (IllegalArgumentException e) {
-        		LOGGER.debug("Exception decoding base64 [{}] - {}", content, e.getMessage());   
-        		return false;
+    		LOGGER.debug("Exception decoding base64 [{}] - {}", content, e.getMessage());   
+    		return false;
         }
     }
 
