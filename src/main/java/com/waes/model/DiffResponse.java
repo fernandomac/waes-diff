@@ -1,7 +1,11 @@
 package com.waes.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import io.swagger.annotations.ApiModelProperty;
 
+@JsonInclude(Include.NON_EMPTY)	
 public class DiffResponse {
 
 	@ApiModelProperty(
